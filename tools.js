@@ -317,9 +317,82 @@ JS中的数组的主要问题是，化们被实现成了对象，与其他语言
 
 
 
+//------------------------------------------------------------------------------------------
+//关于 JavaScript 闭包的简单例子
 
 
-//面包屑 导航
+无闭包：
+
+var x = [];
+for (var i = 0; i < 9; i++) {  
+        x[i] = i
+}
+console.log(x);
+ //[0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+var x = [];
+for (var i = 0; i < 9; i++) {
+    setTimeout(function () {
+        x[i] = i
+    }, 1000)
+}
+console.log(x);
+//[]
+
+
+闭包：
+
+var y = [];
+function doSetTimeout(i) {
+    setTimeout(function () {
+        y[i] = i;
+    }, 1000);
+}
+for (var i = 0; i < 9; i++) {
+    doSetTimeout(i);
+}
+console.log(y);
+简写：
+
+var z = [];
+for (var i = 0; i < 9; i++) {
+    (function (i) {
+        setTimeout(function () {
+            z[i] = i;
+        }, 1000)
+    })(i);
+}
+console.log(z);
+
+
+
+
+var z = [];
+for (var i = 0; i < 9; i++) {
+    (function (i) {
+        setTimeout(function () {
+            z[i] = i;
+            console.log(z);
+        }, 1000)
+
+    })(i);
+}
+console.log(z);
+// []
+
+//[0]
+//[0, 1]
+//[0, 1, 2]
+//[0, 1, 2, 3]
+//[0, 1, 2, 3, 4]
+//[0, 1, 2, 3, 4, 5]
+//[0, 1, 2, 3, 4, 5, 6]
+//[0, 1, 2, 3, 4, 5, 6, 7]
+//[0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+
+
+//面包屑 导航  待续
 
 
 
