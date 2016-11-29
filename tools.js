@@ -399,15 +399,153 @@ console.log(z);
 
 
 
+//闭包是指 有权访问另一个函数作用域中的变量的 函数。
+
+创建方法
+在一个函数内部创建另一个函数（闭包）
+
+原理
+普通函数：在outer()执行完，局部变量local被销毁，内存仅仅保存全局作用域。
+
+function outer() {
+    var localVal = 30;
+    return localVal;
+}
+outer(); // 30
+闭包：在outer()执行后，func()仍然可以访问outer()内部的localVal，因为func()将outer()的内的活动对象（localVal）添加到了func()的作用域链。在outer()执行后，由于localVal被func()的作用域链所引用，所以localVal不会被销毁，而是存在内存中，直到func()被销毁，才会随之销毁。
+
+function outer() {
+    var localVal = 30;
+    return function() {
+        return localVal;
+    }
+}
+var func = outer();
+func(); // 30
+闭包的应用
+监听事件
+!function() {
+    var localData = "localData here";
+    document.addEventListener('click',
+        function() {
+            console.log(localData);
+        }
+    );
+}();
+ajax事件
+!function() {
+    var localData = "localData here";
+    var url = "http://www.baidu.com/";
+    $.ajax({
+        url: url;
+        success: function() {
+            console.log(localData);
+        }
+    });
+}();
+错误的使用
+循环
+
+使用闭包封装函数，便于使用私有变量。
+闭包的好坏
+好处：灵活方便，封装
+坏处：空间浪费，内存泄漏（循环引用），性能消耗
+
+在javascript中闭包已经成了一个很神秘，让人高山仰止的存在。
+
+今天有对闭包进行了一番搜索，有了一种明悟：闭包就相当于黑盒的钥匙。当你手握闭包，黑盒就能为你所用。
+
+为什么这么说呢？这个想法来自于这篇文章：
+
+function foo(x) {
+var tmp = 3;
+return function (y) {
+    alert(x + y + tmp);
+    x.memb = x.memb ? x.memb + 1 : 1;
+    alert(x.memb);
+    }
+}
+var age = new Number(2);
+var bar = foo(age); // bar 现在是一个引用了age的闭包
+bar(10);
+如果一个函数访问了它的外部变量，那么它就是一个闭包。　　注意，外部函数不是必需的。通过访问外部变量，一个闭包可以维持（keep alive）这些变量。在内部函数和外部函数的例子中，外部函数可以创建局部变量，并且最终退出；但是，如果任何一个或多个内部函数在它退出后却没有退出，那么内部函数就维持了外部函数的局部数据。
+
+闭包经常用于创建含有隐藏数据的函数（但并不总是这样）。
 
 
 
+//数组在JS中是特殊的对象，效率很低。
+var arr = [];
+    arr[0]  = 'a';
+    arr[1]  = 'b';
+    arr.foo = 'c';
+    console.log(arr.length);//2  为什么不是3呢
+
+
+//数组去重新思路
+
+[1,2,3,4,1,5].indexOf(1,1);//如果有重复的 indexOf方法返回的就是第二次出现此元素的位置。如果没有重复的那就是-1
+//4
+[1,2,3,4,5].indexOf(1,1);//找有没有和他自己一样的元素。从他自己的位置开始找。他自己不算。如果有则返回，那个与当前元素一样的元素的位置索引。如果没有则返回-1.
+//-1
+
+var arr = [3,5,2,6,2,3,5,8,6];
+
+function distinct(arr) {
+    return arr.filter(function (elem,index,arr){
+        return arr.indexOf(elem,index+1) === -1; //从前开始干掉重复的元素。
+    });
+}
+
+console.log(distinct(arr));//[2, 3, 5, 8, 6]//去重方法不一样，结果也不一样。但是，都 达到了去重的效果。
+
+//用常规思路实现
+//方法有好多，比如新建一个数组，原数组的内容依次往里放，若该数组元素已存在，则跳过；又或者先排序，依次比较前后两个元素是否相等，若相等，则去掉删除后一个元素。
+var arr = [3,5,2,6,2,3,5,8,6];
+function distinctArr(arr){
+    var r = [];
+    for(var i=0;i<arr.length;i++){
+        if(r.join().indexOf(arr[i]) >-1){}else {r.push(arr[i])}//比较恶心的一种方法
+    }
+    return r;
+};
+
+distinctArr(arr);//[3, 5, 2, 6, 8] //去重方法不一样，结果也不一样。但是，都 达到了去重的效果。
+
+//比较方法 去重 issues
+Array.prototype.remove=function(dx) 
+{ 
+    if(isNaN(dx)||dx>this.length){return false;} 
+    for(var i=0,n=0;i<this.length;i++) 
+    { 
+        if(this[i]!=this[dx]) 
+        { 
+            this[n++]=this[i] 
+        } 
+    } 
+    this.length-=1 
+} 
+var arr = [3,5,2,6,2,3,5,8,6];
+function distinctArr2(arr){
+    var r=[];
+    for(var i=0;i<arr.length;i++){
+        for(var j=0;j<arr.length;j++){
+            if(arr[i] == arr[j]){
+                arr.remove(arr[i])
+            }else{
+               return  r.push(arr[i]);
+            }
+        }
+    }
+};
+distinctArr2(arr);
 
 
 
-
-
-
+//删除指定索引的字符，在字符串中
+function removeStri(str){
+    return str.substring(...)
+}
 
 
 
