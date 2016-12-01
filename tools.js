@@ -569,11 +569,45 @@ alert("elements: "+b+"\nLength: "+b.length);
 
 
 
-
-
-
-
-
-
+//动态规划实例 ：： 斐波那契数列
+//
+//0,1,1,2,3,5,8,13,21,34,55......
+function recurFib(n){
+    if(n<2){
+        return n;
+    }
+    else{
+        return recurFib(n-1) + recurFib(n-2);
+    }
+};
+var start = new Date().getTime();
+recurFib(200);
+var stop = new Date().getTime();
+console.log('递归计算耗时 '+(stop-start) + '毫秒')
+//此函数的问题在于执行效率低，可以 通过，斐波那契函数生成的递归树 看的出来，有太多值在递归调用中被重新计算。
+//如果编译器可以将已经计算的值记录下来。函数的执行效率就不会如此差。
+//我们可以通过动态规划的技巧，来设计一个效率更高的算法。new Date().getTime();
+//
+function dynFib(n){
+    var val = [];
+    for(var i=0;i<=n;++i){
+        val[i] = 0;
+    }
+    if(n==1||n==2){
+        return 1;
+    }
+    else{
+        val[1] =1;
+        val[2] = 2;
+        for(var i=3;i<=n;++i){
+            val[i] = val[i-1] + val[i-2];
+        }
+        return val[n-1];
+    }
+};
+var start = new Date().getTime();
+dynFib(20);
+var stop = new Date().getTime();
+console.log('动态规划计算耗时 '+(stop-start) + '毫秒')
 
 
