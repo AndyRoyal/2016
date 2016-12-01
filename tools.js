@@ -546,7 +546,25 @@ distinctArr2(arr);
 function removeStri(str){
     return str.substring(...)
 }
+/
+* 
+*  方法:Array.baoremove(dx) 
+*  功能:删除数组元素. 
+*  参数:dx删除元素的下标. 
+*  返回:在原数组上修改数组. 
+*/ 
 
+
+
+Array.prototype.baoremove = function(dx) 
+{ 
+    if(isNaN(dx)||dx>this.length){return false;} 
+    this.splice(dx,1); 
+} 
+b = ['1','2','3','4','5']; 
+alert("elements: "+b+"\nLength: "+b.length); 
+b.baoremove(1); //删除下标为1的元素 
+alert("elements: "+b+"\nLength: "+b.length); 
 
 
 
