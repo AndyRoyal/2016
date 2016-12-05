@@ -689,3 +689,8 @@ var stop = new Date().getTime();
 console.log('动态规划计算耗时 '+(stop-start) + '毫秒')
 
 
+
+
+
+//-----------------------随想function tools-------------------------------//
+
