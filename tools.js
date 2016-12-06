@@ -694,3 +694,52 @@ console.log('动态规划计算耗时 '+(stop-start) + '毫秒')
 
 //-----------------------随想function tools-------------------------------//
 
+function isobj(o){
+    return Object.prototype.toString.call(o) === '[object Object]'
+}
+var a = {},b=[];
+isobj(a);
+isobj(b);
+
+
+var oP = Object.prototype,
+toString = oP.toString;
+
+function typeOf(value) {
+    if (null === value) {
+        return 'null';
+    }
+
+    var type = typeof value;
+    if ('undefined' === type || 'string' === type) {
+        return type;
+    }
+
+    var typeString = toString.call(value);
+    switch (typeString) {
+    case '[object Array]':
+        return 'array';
+    case '[object Date]':
+        return 'date';
+    case '[object Boolean]':
+        return 'boolean';
+    case '[object Number]':
+        return 'number';
+    case '[object Function]':
+        return 'function';
+    case '[object RegExp]':
+        return 'regexp';
+    case '[object Object]':
+        if (undefined !== value.nodeType) {
+            if (3 == value.nodeType) {
+                return (/\S/).test(value.nodeValue) ? 'textnode': 'whitespace';
+            } else {
+                return 'element';
+            }
+        } else {
+            return 'object';
+        }
+    default:
+        return 'unknow';
+    }
+}
