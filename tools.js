@@ -702,8 +702,7 @@ isobj(a);
 isobj(b);
 
 
-var oP = Object.prototype,
-toString = oP.toString;
+//----------------//
 
 function typeOf(value) {
     if (null === value) {
@@ -715,7 +714,7 @@ function typeOf(value) {
         return type;
     }
 
-    var typeString = toString.call(value);
+    var typeString = Object.prototype.toString.call(value);
     switch (typeString) {
     case '[object Array]':
         return 'array';
