@@ -762,3 +762,15 @@ function trim1(str){
 trim1('   abc d  '); //
 
 //用正则最合适，方便
+//------数组去重相关 去除相邻重复键值 ----------//
+function arrRD(arr){
+    for(var i=0;i<arr.length;i++){
+        if(arr[i] == arr[i+1]){
+            //arr[i]=null;//替换掉相邻重复元素
+            arr.splice(i,1)//通过splice删除相邻重复元素
+
+        }
+    }
+    return arr;
+}
+arrRD([1,1,2,3,3,1,3,4,5,6,6,7,8,8]);//[1, 2, 3, 1, 3, 4, 5, 6, 7, 8]
