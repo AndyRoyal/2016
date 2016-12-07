@@ -702,7 +702,7 @@ isobj(a);
 isobj(b);
 
 
-//----------------//
+//--------类型判断回顾--------//
 
 function typeOf(value) {
     if (null === value) {
@@ -742,3 +742,23 @@ function typeOf(value) {
         return 'unknow';
     }
 }
+
+//------去除字符串左右两端的空格 ----------//
+function trim(str){
+    return str.replace(/(^\s*)|(\s*$)/g,"");
+};
+trim('   ab c    ');
+function trim1(str){
+ /*  for(var i=0;i<str.length;i++){
+        if(str[i] == "a"){
+            return str[i] =1 //遇到第一个就返回。
+
+        }
+    }    */
+     //return   str.replace('a','222');//只能替换第一个匹配到的字符串
+
+}
+    
+trim1('   abc d  '); //
+
+//用正则最合适，方便
