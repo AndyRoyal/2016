@@ -1,11 +1,5 @@
 var a=1;var b=false;
-if(a){
-   if(b){return;}
-}else if(a){
-    console.log("else if")
-}else{
 
-}
 
 var str="http://aa";var str1="//bbbb";
 
@@ -774,3 +768,75 @@ function arrRD(arr){
     return arr;
 }
 arrRD([1,1,2,3,3,1,3,4,5,6,6,7,8,8]);//[1, 2, 3, 1, 3, 4, 5, 6, 7, 8]
+
+//------------数组去重--------------//
+function arrRD(arr){
+    var r=[],
+    n={};//hash表
+    for(var i=0;i<arr.length;i++){
+        //如果hash表中没有当前项，
+        if(!n[this[i]]){
+            n[this[i]] = true;//存入hash表
+            r.push(this[i]);//把当前数组的当前项push到临时数组里，
+            //1，临时数组是必须的，再加一个条件，如果满足条件，则放入到临时数组里。基本都 是这个思路
+        }
+    }
+};
+function unique(arr){
+    var r=[];//临时数组
+    for(var i=0;i<arr.length;i++){//遍历是必须的，不是一个元素就只能遍历
+        if(r.indexOf(this[i]) == -1) r.push(this[i]);//就一个条件，不存在于临时数组的元素，push进临时数组中，否则就是重复的，不放入临时数组，然后输出临时数组即可。最简单的数组去重
+    }
+    return r;
+};
+
+
+function unique2(arr){
+    var n = [this[0]];//结果数组
+    for(var i=1;i<this.length;i++){
+        //用indexOf的方法因为其返回的是元素的索引，第一次出现的索引，
+        if(arr.indexOf(this[i]) == i){
+            n.push(this[i]);
+        }
+    }
+}
+//------------数组删除某个元素--------------//
+
+function remByVal(arr,val){
+    for(var i=0;i<arr.length;i++){
+        if(arr[i] == val){
+            arr.splice(i,1);
+            break;
+        }
+    }
+}
+var arr = ['a','b','b','c','d','e','f','f'];
+remByVal(arr,'b');//只删除遇到的第一个匹配项
+
+//------------ 正则部分数据类似判断 --------------//
+type={
+        'number':/^\d+$/,//  /^[0-9]+$/
+        'string':/^[^\/]+$/,
+        'date':/^[0-9]{8,8}$/
+};
+function isnum(n){
+    //return (/^\d+$/).test(n);
+    return /^\d+$/.test(n);
+
+}
+isnum(7);
+function isstr(str){
+    return /^[^\/]+$/.test(str);
+};
+isstr('afafafdafa');
+function isdate(d){
+    //var regexp = /^([1][7-9][0-9][0-9]|[2][0][0-9][0-9])(\-)([0][1-9]|[1][0-2])(\-)([0-2][1-9]|[3][0-1])$/g;
+    //return (/^[0-9]{8,8}$/ ||  /\d{4}-\d{1,2}-\d{1,2}/ || /\d{1,2}/\d{1,2}/\d{4}/).test(d);
+
+    return /^[0-9]{8,8}$/.test(d);
+};
+isdate(20161112);
+
+
+
+//------------ 正则部分数据类似判断 --------------//
