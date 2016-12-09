@@ -756,6 +756,8 @@ function trim1(str){
 trim1('   abc d  '); //
 
 //用正则最合适，方便
+//
+//
 //------数组去重相关 去除相邻重复键值 ----------//
 function arrRD(arr){
     for(var i=0;i<arr.length;i++){
