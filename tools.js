@@ -877,6 +877,8 @@ multiply(x, add(y,z)) == add(multiply(x, y), multiply(x, z));
 
 ###项目中常见的一种造成混淆的原因是，针对同一个概念使用不同的命名。还有通用代码的问题。比如，下面这两个函数做的事情一模一样，但后一个就显得更加通用，可重用性也更高：
 ```javascript
+
+
 // 只针对当前的博客
 var validArticles = function(articles) {
   return articles.filter(function(article){
