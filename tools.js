@@ -896,3 +896,37 @@ var compact = function(xs) {
 
 
 ### this 就像一块脏尿布，我尽可能地避免使用它，因为在函数式编程中根本用不到它。然而，在使用其他的类库时，你却不得不向这个疯狂的世界低头
+
+
+
+
+educeRight 方法（降序）
+reduceRight的语法以及回调函数的规则和reduce方法是一样的，区别就是在与reduce是升序，即角标从0开始，而reduceRight是降序，即角标从arr.length-1开始。如果有初始值，则从最后一个数开始计算，如果没有初始值，则previousValue参数是数组中最后一个元素的值，currentValue是数组中倒数第二个元素的值。
+示例：
+1.下面的示例获取数组中值为 1 到 10 之间的元素。提供给 reduceRight 方法的初始值是一个空数组。
+
+function Process2(previousArray, currentValue) {
+ var nextArray;
+ if (currentValue >= 1 && currentValue <= 10)
+  nextArray = previousArray.concat(currentValue);
+ else
+  nextArray = previousArray;
+ return nextArray;
+}
+var numbers = [20, 1, -5, 6, 50, 3];
+var emptyArray = new Array();
+var resultArray = numbers.reduceRight(Process2, emptyArray);
+document.write("result array=" + resultArray);
+// Output:
+// result array=3,6,1
+2.reduceRight 方法可应用于字符串。下面的示例演示如何使用此方法反转字符串中的字符。
+
+function AppendToArray(previousValue, currentValue) {
+ return previousValue + currentValue;
+}
+var word = "retupmoc";
+var result = [].reduceRight.call(word, AppendToArray, "the ");
+// var result = Array.prototype.reduceRight.call(word, AppendToArray, "the ");
+document.write(result);
+// Output:
+// the computer
