@@ -1658,4 +1658,4 @@ if (window.cartInfo) {
 }(window));
 
 
-//end----2015老代码----gome-mini-cart
+//end----2015老代码----gome-mini-cart7---------------------
